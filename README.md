@@ -1,4 +1,4 @@
-# PUNTO DE VENTA MVC PHP 8.1
+# PUNTO DE VENTA UDEMY MVC PHP 8.1
 
 ## Requirimientos
 

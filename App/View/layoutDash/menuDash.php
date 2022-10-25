@@ -7,7 +7,7 @@ $mainLink = base_url('/dashboard');
 $logoAdmin = '../public/logo/logo.png';
 
 //DATOS DEL USUARIO ADMIN
-$userName = session()->user()->name;
+$userName = session()->user()->nombre;
 
 
 

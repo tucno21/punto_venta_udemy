@@ -7,6 +7,7 @@ const buttonsX = [
     extend: "copy", //copyHtml5
     footer: true,
     text: "<span class='badge bg-primary fs-4'><i class='bi bi-clipboard-check'></i></span>",
+    // title: "Copiado al portapapeles",
   },
   {
     extend: "excel", //excelHtml5

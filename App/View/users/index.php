@@ -64,7 +64,7 @@ $linksScript2 = [
                                     <td><?= $user->telefono ?></td>
 
                                     <td>
-                                        <p class="<?= $user->status == 1  ? 'btn btn-outline-success rounded-pill  waves-effect waves-light btn-sm px-1 py-0' : 'btn btn-outline-danger rounded-pill waves-effect waves-light btn-sm px-1 py-0' ?>"><?= $user->status == 1  ? 'Habilitado' : 'Inhabilitado' ?> </p>
+                                        <p <?= $user->status == 1  ? "data-link=" . route('users.status') . "?iduser=" . $user->id . "&status=0" : "data-link=" . route('users.status') . "?iduser=" . $user->id . "&status=1" ?> class="userStatus  <?= $user->status == 1  ? 'badge rounded-pill bg-success' : 'badge rounded-pill bg-danger' ?>"><?= $user->status == 1  ? 'Habilitado' : 'Inhabilitado' ?></p>
                                     </td>
 
                                     <td><?= $user->rol_name ?></td>

@@ -135,4 +135,11 @@ class UserController extends Controller
         // dd($result);
         return redirect()->route('users.index');
     }
+
+    public function status()
+    {
+        $data = $this->request()->getInput();
+        Auth::update($data->iduser, $data);
+        return redirect()->route('users.index');
+    }
 }

@@ -29,6 +29,7 @@ Route::post('/users/create', [UserController::class, 'store']);
 Route::get('/users/edit', [UserController::class, 'edit'])->name('users.edit');
 Route::post('/users/edit', [UserController::class, 'update']);
 Route::get('/users/destroy', [UserController::class, 'destroy'])->name('users.destroy');
+Route::get('/users/status', [UserController::class, 'status'])->name('users.status');
 
 //roles
 Route::get('/roles', [RolController::class, 'index'])->name('roles.index');

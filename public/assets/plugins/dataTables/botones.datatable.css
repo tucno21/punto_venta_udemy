@@ -1,0 +1,8 @@
+.buttons-html5,
+.buttons-print,
+.buttons-colvis {
+    background-color: transparent;
+    color: #fff;
+    padding: 0;
+    border: none;
+}

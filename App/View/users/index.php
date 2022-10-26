@@ -1,3 +1,17 @@
+<?php
+$linksCss2 = [
+    base_url . '/assets/plugins/dataTables/datatables.bootstrap5.css',
+    base_url . '/assets/plugins/dataTables/botones.datatable.css',
+];
+
+$linksScript2 = [
+    base_url . '/assets/plugins/dataTables/pdfmake.min.js',
+    base_url . '/assets/plugins/dataTables/vfs_fonts.js',
+    base_url . '/assets/plugins/dataTables/datatable.bootstrap5.js',
+    base_url . '/assets/js/datatable.js',
+];
+?>
+
 <?php include ext('layoutdash.head') ?>
 <div class="pcoded-content">
     <!-- [ breadcrumb ] start -->
@@ -27,48 +41,48 @@
                     <h5>Lista de usuarios</h5>
                 </div>
                 <div class="card-body table-border-style p-3">
-                    <div class="table-responsive">
-                        <table class="table table-striped table-sm">
-                            <thead>
+
+                    <table class="table table-striped table-sm dt-responsive" id="datatableAll">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>#</th>
+                                <th>Nombre</th>
+                                <th>Email</th>
+                                <th>Telefono</th>
+                                <th>Estado</th>
+                                <th>Rol</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-group-divider">
+                            <?php $i = 1;
+                            foreach ($users as $user) : ?>
                                 <tr>
-                                    <th>#</th>
-                                    <th>Nombre</th>
-                                    <th>Email</th>
-                                    <th>Telefono</th>
-                                    <th>Estado</th>
-                                    <th>Rol</th>
-                                    <th>Acciones</th>
+                                    <th scope="row"><?= $i ?></th>
+                                    <td><?= $user->nombre . ' ' . $user->apellido ?></td>
+                                    <td><?= $user->email ?></td>
+                                    <td><?= $user->telefono ?></td>
+
+                                    <td>
+                                        <p class="<?= $user->status == 1  ? 'btn btn-outline-success rounded-pill  waves-effect waves-light btn-sm px-1 py-0' : 'btn btn-outline-danger rounded-pill waves-effect waves-light btn-sm px-1 py-0' ?>"><?= $user->status == 1  ? 'Habilitado' : 'Inhabilitado' ?> </p>
+                                    </td>
+
+                                    <td><?= $user->rol_name ?></td>
+
+                                    <td>
+                                        <?php if (can('users.edit')) : ?>
+                                            <a href="<?= route('users.edit') . '?id=' . $user->id ?>" class="btn btn-outline-warning btn-sm"><i class="bi bi-pencil"></i></a>
+                                        <?php endif;  ?>
+                                        <?php if (can('users.destroy')) : ?>
+                                            <a href=<?= route('users.destroy') . '?id=' . $user->id ?>" class="btn btn-outline-danger btn-sm"><i class="bi bi-trash3"></i></a>
+                                        <?php endif;  ?>
+                                    </td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                <?php $i = 1;
-                                foreach ($users as $user) : ?>
-                                    <tr>
-                                        <th scope="row"><?= $i ?></th>
-                                        <td><?= $user->nombre . ' ' . $user->apellido ?></td>
-                                        <td><?= $user->email ?></td>
-                                        <td><?= $user->telefono ?></td>
+                            <?php $i++;
+                            endforeach; ?>
+                        </tbody>
+                    </table>
 
-                                        <td>
-                                            <p class="<?= $user->status == 1  ? 'btn btn-outline-success rounded-pill  waves-effect waves-light btn-sm px-1 py-0' : 'btn btn-outline-danger rounded-pill waves-effect waves-light btn-sm px-1 py-0' ?>"><?= $user->status == 1  ? 'Habilitado' : 'Inhabilitado' ?> </p>
-                                        </td>
-
-                                        <td><?= $user->rol_name ?></td>
-
-                                        <td>
-                                            <?php if (can('users.edit')) : ?>
-                                                <a href="<?= route('users.edit') . '?id=' . $user->id ?>" class="btn btn-outline-warning btn-sm"><i class="bi bi-pencil"></i></a>
-                                            <?php endif;  ?>
-                                            <?php if (can('users.destroy')) : ?>
-                                                <a href=<?= route('users.destroy') . '?id=' . $user->id ?>" class="btn btn-outline-danger btn-sm"><i class="bi bi-trash3"></i></a>
-                                            <?php endif;  ?>
-                                        </td>
-                                    </tr>
-                                <?php $i++;
-                                endforeach; ?>
-                            </tbody>
-                        </table>
-                    </div>
                 </div>
             </div>
         </div>

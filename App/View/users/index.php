@@ -74,7 +74,7 @@ $linksScript2 = [
                                             <a href="<?= route('users.edit') . '?id=' . $user->id ?>" class="btn btn-outline-warning btn-sm"><i class="bi bi-pencil"></i></a>
                                         <?php endif;  ?>
                                         <?php if (can('users.destroy')) : ?>
-                                            <a href=<?= route('users.destroy') . '?id=' . $user->id ?>" class="btn btn-outline-danger btn-sm"><i class="bi bi-trash3"></i></a>
+                                            <a href=<?= route('users.destroy') . '?id=' . $user->id ?>" class="btn btn-outline-danger btn-sm deleteItem"><i class="bi bi-trash3"></i></a>
                                         <?php endif;  ?>
                                     </td>
                                 </tr>

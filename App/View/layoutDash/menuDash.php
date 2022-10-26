@@ -83,4 +83,6 @@ $linksScript = [
     $linkURL . '/assets/js/bootstrap.min.js',
     $linkURL . '/assets/js/feather.min.js',
     $linkURL . '/assets/js/pcoded.js',
+    $linkURL . '/assets/plugins/sweetalert2/sweetalert2.js',
+    $linkURL . '/assets/js/alerts.js',
 ];

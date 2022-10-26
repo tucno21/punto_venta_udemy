@@ -17,7 +17,7 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = Auth::select('users.id', 'users.email', 'users.name', 'users.status', 'roles.rol_name')
+        $users = Auth::select('users.id', 'users.nombre, users.apellido', 'users.email', 'users.telefono', 'users.rol_id', 'users.status', 'roles.rol_name')
             ->join('roles', 'users.rol_id', '=', 'roles.id')
             ->get();
 
@@ -48,10 +48,13 @@ class UserController extends Controller
         $data = $this->request()->getInput();
 
         $valid = $this->validate($data, [
-            'name' => 'required|text',
+            'nombre' => 'required|alpha_space',
+            'apellido' => 'required|alpha_space',
             'email' => 'required|email|unique:Auth,email',
-            'password' => 'required|min:3|max:12',
+            'password' => 'required|min:3|max:20',
+            'telefono' => 'required|integer|between:9,9',
             'rol_id' => 'required',
+            'status' => 'alpha_numeric',
         ]);
 
         if ($valid !== true) {
@@ -80,7 +83,8 @@ class UserController extends Controller
             $user = null;
         } else {
             // $user = Auth::first($id->id);
-            $user = Auth::select('id', 'name', 'email', 'status', 'rol_id')
+            // $user = Auth::select('id', 'name', 'email', 'status', 'rol_id')
+            $user = Auth::select('id, nombre, apellido, email, telefono, status, rol_id')
                 ->where('id', $id->id)
                 ->get();
         }
@@ -97,10 +101,13 @@ class UserController extends Controller
         $data = $this->request()->getInput();
 
         $valid = $this->validate($data, [
-            'name' => 'required|text',
+            'nombre' => 'required|alpha_space',
+            'apellido' => 'required|alpha_space',
             'email' => 'required|email|not_unique:Auth,email',
-            'password' => 'required|min:3|max:12',
+            'password' => 'required|min:3|max:20',
+            'telefono' => 'required|integer|between:9,9',
             'rol_id' => 'required',
+            'status' => 'alpha_numeric',
         ]);
 
         if ($valid !== true) {

@@ -10,7 +10,7 @@
                     </div>
                     <div class="">
                         <?php if (can('users.create')) : ?>
-                            <a href="<?= route('users.create') ?>" class="btn btn-outline-dark btn-sm">Crear usuario</a>
+                            <a href="<?= route('users.create') ?>" class="btn btn-dark btn-sm">Crear usuario</a>
                         <?php endif;  ?>
                     </div>
                 </div>
@@ -23,43 +23,49 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header p-2">
                     <h5>Lista de usuarios</h5>
                 </div>
-                <div class="card-body table-border-style">
+                <div class="card-body table-border-style p-3">
                     <div class="table-responsive">
-                        <table class="table table-striped">
+                        <table class="table table-striped table-sm">
                             <thead>
                                 <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Nombre</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Estado</th>
-                                    <th scope="col">Rol</th>
-                                    <th scope="col">Editar</th>
-                                    <th scope="col">Eliminar</th>
+                                    <th>#</th>
+                                    <th>Nombre</th>
+                                    <th>Email</th>
+                                    <th>Telefono</th>
+                                    <th>Estado</th>
+                                    <th>Rol</th>
+                                    <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($users as $user) : ?>
+                                <?php $i = 1;
+                                foreach ($users as $user) : ?>
                                     <tr>
-                                        <th scope="row"><?= $user->id ?></th>
-                                        <td><?= $user->name ?></td>
+                                        <th scope="row"><?= $i ?></th>
+                                        <td><?= $user->nombre . ' ' . $user->apellido ?></td>
                                         <td><?= $user->email ?></td>
+                                        <td><?= $user->telefono ?></td>
+
                                         <td>
-                                            <p class="<?= $user->status == 1  ? 'btn btn-outline-success rounded-pill  waves-effect waves-light btn-sm' : 'btn btn-outline-danger rounded-pill waves-effect waves-light btn-sm' ?>"><?= $user->status == 1  ? 'activo' : 'inactivo' ?> </p>
+                                            <p class="<?= $user->status == 1  ? 'btn btn-outline-success rounded-pill  waves-effect waves-light btn-sm px-1 py-0' : 'btn btn-outline-danger rounded-pill waves-effect waves-light btn-sm px-1 py-0' ?>"><?= $user->status == 1  ? 'Habilitado' : 'Inhabilitado' ?> </p>
                                         </td>
+
                                         <td><?= $user->rol_name ?></td>
 
-                                        <?php if (can('users.edit')) : ?>
-                                            <td><a href="<?= route('users.edit') . '?id=' . $user->id ?>" class="btn btn-outline-warning btn-sm"><i class="bi bi-pencil"></i></a></td>
-                                        <?php endif;  ?>
-
-                                        <?php if (can('users.destroy')) : ?>
-                                            <td><a href=<?= route('users.destroy') . '?id=' . $user->id ?>" class="btn btn-outline-danger btn-sm"><i class="bi bi-trash3"></i></a></td>
-                                        <?php endif;  ?>
+                                        <td>
+                                            <?php if (can('users.edit')) : ?>
+                                                <a href="<?= route('users.edit') . '?id=' . $user->id ?>" class="btn btn-outline-warning btn-sm"><i class="bi bi-pencil"></i></a>
+                                            <?php endif;  ?>
+                                            <?php if (can('users.destroy')) : ?>
+                                                <a href=<?= route('users.destroy') . '?id=' . $user->id ?>" class="btn btn-outline-danger btn-sm"><i class="bi bi-trash3"></i></a>
+                                            <?php endif;  ?>
+                                        </td>
                                     </tr>
-                                <?php endforeach; ?>
+                                <?php $i++;
+                                endforeach; ?>
                             </tbody>
                         </table>
                     </div>

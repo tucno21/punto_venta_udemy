@@ -9,8 +9,7 @@
                         <h5 class="m-b-10">Crear usuario</h5>
                     </div>
                     <div class="">
-                        <button type="button" class="btn btn-primary btn-sm">Primary</button>
-                        <button type="button" class="btn btn-success btn-sm">Success</button>
+                        <a href="<?= route('users.index') ?>" class="btn btn-dark btn-sm">Ver Usuarios</a>
                     </div>
                 </div>
             </div>
@@ -22,10 +21,10 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header p-2">
                     <h5>Completar los campos</h5>
                 </div>
-                <div class="card-body">
+                <div class="card-body py-2">
                     <!-- <h5>Form controls</h5>
                     <hr> -->
                     <form action="<?= route('users.create') ?>" method="POST">
@@ -35,7 +34,7 @@
                             <?php include_once 'imputs.php' ?>
 
                             <div class="col-md-12 text-center">
-                                <button class="btn btn-primary" type="submit">Crear Usuario</button>
+                                <button class="btn btn-success" type="submit">Crear Usuario</button>
                             </div>
                         </div>
                     </form>

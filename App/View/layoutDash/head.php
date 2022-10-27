@@ -243,7 +243,7 @@
                             <!-- <img src="assets/images/user/avatar-2.jpg" alt="user-image" class="user-avtar"> -->
                             <span>
                                 <span class="user-name"><?= $userName ?></span>
-                                <span class="user-desc">Administrator</span>
+                                <span class="user-desc"><?= $rolName ?></span>
                             </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end pc-h-dropdown">

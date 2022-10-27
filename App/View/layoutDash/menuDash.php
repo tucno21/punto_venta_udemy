@@ -8,8 +8,7 @@ $logoAdmin = '../public/logo/logo.png';
 
 //DATOS DEL USUARIO ADMIN
 $userName = session()->user()->nombre;
-
-
+$rolName = session()->user()->rol_name;
 
 //MENU CERRAR O PERFIL DE ADMINISTRADOR
 $menuSession = [

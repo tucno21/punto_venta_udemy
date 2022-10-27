@@ -76,7 +76,7 @@ $linksSidebar = [
             ],
             [
                 'text' => 'Productos',
-                'url'  => 'hola',
+                'url'  => route('productos.index'),
                 'icon' => 'fas fa-circle',
             ],
         ],
@@ -144,6 +144,7 @@ $linksScript = [
     $linkURL . '/assets/js/pcoded.js',
     $linkURL . '/assets/plugins/sweetalert2/sweetalert2.js',
     $linkURL . '/assets/plugins/ckeditor/ckeditor.js',
+    $linkURL . '/assets/js/visorfoto.js',
     $linkURL . '/assets/js/alerts.js',
     $linkURL . '/assets/js/editorMensaje.js',
 ];

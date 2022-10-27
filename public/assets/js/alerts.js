@@ -10,6 +10,7 @@ let deleteItem = document.querySelectorAll(".deleteItem");
 let userStatus = document.querySelectorAll(".userStatus");
 let medidasStatus = document.querySelectorAll(".medidasStatus");
 let categoriaStatus = document.querySelectorAll(".categoriaStatus");
+let cambioEstado = document.querySelectorAll(".cambioEstado");
 
 if (deleteItem) {
   deleteItem.forEach((element) => {
@@ -50,6 +51,18 @@ if (medidasStatus) {
 if (categoriaStatus) {
   //   console.log("hol");
   categoriaStatus.forEach((element) => {
+    element.addEventListener("click", (e) => {
+      //capturar data-link
+      let urlRequest = element.getAttribute("data-link");
+      //alert
+      statusAlert(urlRequest);
+      //   console.log(urlRequest);
+    });
+  });
+}
+if (cambioEstado) {
+  //   console.log("hol");
+  cambioEstado.forEach((element) => {
     element.addEventListener("click", (e) => {
       //capturar data-link
       let urlRequest = element.getAttribute("data-link");

@@ -9,6 +9,7 @@ use App\Controller\BackView\ClienteController;
 use App\Controller\BackView\ProductoController;
 use App\Controller\BackView\CategoriaController;
 use App\Controller\BackView\DashboardController;
+use App\Controller\BackView\ProveedorController;
 use App\Controller\BackView\PermissionController;
 use App\Controller\BackView\ConfiguracionController;
 use App\Controller\BackView\RolesPermissionController;
@@ -96,3 +97,12 @@ Route::get('/clientes/edit', [ClienteController::class, 'edit'])->name('clientes
 Route::post('/clientes/edit', [ClienteController::class, 'update']);
 Route::get('/clientes/destroy', [ClienteController::class, 'destroy'])->name('clientes.destroy');
 Route::get('/clientes/status', [ClienteController::class, 'status'])->name('clientes.status');
+
+//ProveedorController
+Route::get('/proveedores', [ProveedorController::class, 'index'])->name('proveedores.index');
+Route::get('/proveedores/create', [ProveedorController::class, 'create'])->name('proveedores.create');
+Route::post('/proveedores/create', [ProveedorController::class, 'store']);
+Route::get('/proveedores/edit', [ProveedorController::class, 'edit'])->name('proveedores.edit');
+Route::post('/proveedores/edit', [ProveedorController::class, 'update']);
+Route::get('/proveedores/destroy', [ProveedorController::class, 'destroy'])->name('proveedores.destroy');
+Route::get('/proveedores/status', [ProveedorController::class, 'status'])->name('proveedores.status');

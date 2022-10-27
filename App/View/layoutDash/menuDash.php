@@ -90,7 +90,7 @@ $linksSidebar = [
     [
         'mode' => 'menu',
         'text' => 'Proveedores',
-        'url'  => 'hola',
+        'url'  =>  route('proveedores.index'),
         'icon' => 'bi bi-truck',
     ],
     [

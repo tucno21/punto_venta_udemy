@@ -57,13 +57,12 @@ $linksSidebar = [
                 ],
             ],
         ] : null,
-    // can('products.index') ?
-    //     [
-    //         'mode' => 'menu',
-    //         'text' => 'Productos',
-    //         'url'  => route('products.index'),
-    //         'icon' => 'bi bi-shop',
-    //     ] : null,
+    [
+        'mode' => 'menu',
+        'text' => 'Empresa',
+        'url'  => route('configuracion.index'),
+        'icon' => 'bi bi-building',
+    ],
 ];
 
 
@@ -84,5 +83,7 @@ $linksScript = [
     $linkURL . '/assets/js/feather.min.js',
     $linkURL . '/assets/js/pcoded.js',
     $linkURL . '/assets/plugins/sweetalert2/sweetalert2.js',
+    $linkURL . '/assets/plugins/ckeditor/ckeditor.js',
     $linkURL . '/assets/js/alerts.js',
+    $linkURL . '/assets/js/editorMensaje.js',
 ];

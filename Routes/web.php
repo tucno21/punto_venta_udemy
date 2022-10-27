@@ -6,6 +6,7 @@ use App\Controller\BackView\RolController;
 use App\Controller\BackView\UserController;
 use App\Controller\BackView\DashboardController;
 use App\Controller\BackView\PermissionController;
+use App\Controller\BackView\ConfiguracionController;
 use App\Controller\BackView\RolesPermissionController;
 
 /**
@@ -50,3 +51,7 @@ Route::get('/permissions/destroy', [PermissionController::class, 'destroy'])->na
 //role y permisos
 Route::get('/roles/permissions', [RolesPermissionController::class, 'edit'])->name('roles.permissions');
 Route::post('/roles/permissions', [RolesPermissionController::class, 'update']);
+
+//ConfiguracionController
+Route::get('/configuracion', [ConfiguracionController::class, 'index'])->name('configuracion.index');
+Route::post('/configuracion', [ConfiguracionController::class, 'update']);

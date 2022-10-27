@@ -65,7 +65,7 @@ $linksSidebar = [
 
             [
                 'text' => 'Medidas',
-                'url'  => 'hola',
+                'url'  => route('medidas.index'),
                 'icon' => 'fas fa-circle',
             ],
 

@@ -4,6 +4,7 @@ use System\Route;
 use App\Controller\Auth\AuthController;
 use App\Controller\BackView\RolController;
 use App\Controller\BackView\UserController;
+use App\Controller\BackView\MedidaController;
 use App\Controller\BackView\DashboardController;
 use App\Controller\BackView\PermissionController;
 use App\Controller\BackView\ConfiguracionController;
@@ -55,3 +56,13 @@ Route::post('/roles/permissions', [RolesPermissionController::class, 'update']);
 //ConfiguracionController
 Route::get('/configuracion', [ConfiguracionController::class, 'index'])->name('configuracion.index');
 Route::post('/configuracion', [ConfiguracionController::class, 'update']);
+
+
+//MedidaController
+Route::get('/medidas', [MedidaController::class, 'index'])->name('medidas.index');
+Route::get('/medidas/create', [MedidaController::class, 'create'])->name('medidas.create');
+Route::post('/medidas/create', [MedidaController::class, 'store']);
+Route::get('/medidas/edit', [MedidaController::class, 'edit'])->name('medidas.edit');
+Route::post('/medidas/edit', [MedidaController::class, 'update']);
+Route::get('/medidas/destroy', [MedidaController::class, 'destroy'])->name('medidas.destroy');
+Route::get('/medidas/status', [MedidaController::class, 'status'])->name('medidas.status');

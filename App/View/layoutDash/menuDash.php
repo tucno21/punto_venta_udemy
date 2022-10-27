@@ -71,7 +71,7 @@ $linksSidebar = [
 
             [
                 'text' => 'Categorias',
-                'url'  => 'hola',
+                'url'  => route('categorias.index'),
                 'icon' => 'fas fa-circle',
             ],
             [

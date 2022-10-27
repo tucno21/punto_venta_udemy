@@ -9,6 +9,7 @@ window.onload = function (event) {
 let deleteItem = document.querySelectorAll(".deleteItem");
 let userStatus = document.querySelectorAll(".userStatus");
 let medidasStatus = document.querySelectorAll(".medidasStatus");
+let categoriaStatus = document.querySelectorAll(".categoriaStatus");
 
 if (deleteItem) {
   deleteItem.forEach((element) => {
@@ -37,6 +38,18 @@ if (userStatus) {
 if (medidasStatus) {
   //   console.log("hol");
   medidasStatus.forEach((element) => {
+    element.addEventListener("click", (e) => {
+      //capturar data-link
+      let urlRequest = element.getAttribute("data-link");
+      //alert
+      statusAlert(urlRequest);
+      //   console.log(urlRequest);
+    });
+  });
+}
+if (categoriaStatus) {
+  //   console.log("hol");
+  categoriaStatus.forEach((element) => {
     element.addEventListener("click", (e) => {
       //capturar data-link
       let urlRequest = element.getAttribute("data-link");

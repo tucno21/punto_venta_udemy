@@ -5,6 +5,7 @@ use App\Controller\Auth\AuthController;
 use App\Controller\BackView\RolController;
 use App\Controller\BackView\UserController;
 use App\Controller\BackView\MedidaController;
+use App\Controller\BackView\CategoriaController;
 use App\Controller\BackView\DashboardController;
 use App\Controller\BackView\PermissionController;
 use App\Controller\BackView\ConfiguracionController;
@@ -66,3 +67,12 @@ Route::get('/medidas/edit', [MedidaController::class, 'edit'])->name('medidas.ed
 Route::post('/medidas/edit', [MedidaController::class, 'update']);
 Route::get('/medidas/destroy', [MedidaController::class, 'destroy'])->name('medidas.destroy');
 Route::get('/medidas/status', [MedidaController::class, 'status'])->name('medidas.status');
+
+//CategoriaController
+Route::get('/categorias', [CategoriaController::class, 'index'])->name('categorias.index');
+Route::get('/categorias/create', [CategoriaController::class, 'create'])->name('categorias.create');
+Route::post('/categorias/create', [CategoriaController::class, 'store']);
+Route::get('/categorias/edit', [CategoriaController::class, 'edit'])->name('categorias.edit');
+Route::post('/categorias/edit', [CategoriaController::class, 'update']);
+Route::get('/categorias/destroy', [CategoriaController::class, 'destroy'])->name('categorias.destroy');
+Route::get('/categorias/status', [CategoriaController::class, 'status'])->name('categorias.status');

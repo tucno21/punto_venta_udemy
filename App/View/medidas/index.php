@@ -33,7 +33,7 @@ $linksScript2 = [
             <div class="row align-items-center">
                 <div class="col d-flex flex-column flex-md-row justify-content-between align-items-center">
                     <div class="page-header-title">
-                        <h5 class="m-b-10">Panel de Usuarios</h5>
+                        <h5 class="m-b-10">Panel de Medidas</h5>
                     </div>
                     <div class="">
                         <a href="<?= route('medidas.create') ?>" class="btn btn-dark btn-sm">Crear Medida</a>

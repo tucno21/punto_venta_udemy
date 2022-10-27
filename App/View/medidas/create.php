@@ -34,7 +34,7 @@
                             <?php include_once 'imputs.php' ?>
 
                             <div class="col-md-12 text-center">
-                                <button class="btn btn-success" type="submit">Crear medida</button>
+                                <button class="btn btn-success" type="submit">Guardar</button>
                             </div>
                         </div>
                     </form>

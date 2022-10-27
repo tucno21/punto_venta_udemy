@@ -58,6 +58,67 @@ $linksSidebar = [
             ],
         ] : null,
     [
+        'mode' => 'submenu',
+        'text'    => 'Mantenimiento',
+        'url'    => '#',
+        'icon' => 'bi bi-card-checklist',
+        'submenu' => [
+
+            [
+                'text' => 'Medidas',
+                'url'  => 'hola',
+                'icon' => 'fas fa-circle',
+            ],
+
+            [
+                'text' => 'Categorias',
+                'url'  => 'hola',
+                'icon' => 'fas fa-circle',
+            ],
+            [
+                'text' => 'Productos',
+                'url'  => 'hola',
+                'icon' => 'fas fa-circle',
+            ],
+        ],
+    ],
+    [
+        'mode' => 'menu',
+        'text' => 'Clientes',
+        'url'  => 'hola',
+        'icon' => 'bi bi-people',
+    ],
+    [
+        'mode' => 'menu',
+        'text' => 'Proveedores',
+        'url'  => 'hola',
+        'icon' => 'bi bi-truck',
+    ],
+    [
+        'mode' => 'menu',
+        'text' => 'Cajas',
+        'url'  => 'hola',
+        'icon' => 'bi bi-wallet2',
+    ],
+    [
+        'mode' => 'menu',
+        'text' => 'Compras',
+        'url'  => 'hola',
+        'icon' => 'bi bi-bag',
+    ],
+    [
+        'mode' => 'menu',
+        'text' => 'Ventas',
+        'url'  => 'hola',
+        'icon' => 'bi bi-cash',
+    ],
+    [
+        'mode' => 'menu',
+        'text' => 'Administración de Creditos',
+        'url'  => 'hola',
+        'icon' => 'bi bi-credit-card-2-back',
+    ],
+    [
         'mode' => 'menu',
         'text' => 'Empresa',
         'url'  => route('configuracion.index'),

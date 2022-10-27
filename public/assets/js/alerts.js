@@ -1,3 +1,11 @@
+window.onload = function (event) {
+  var toastElList = [].slice.call(document.querySelectorAll(".toast"));
+  var toastList = toastElList.map(function (toastEl) {
+    return new bootstrap.Toast(toastEl);
+  });
+  toastList.forEach((toast) => toast.show());
+};
+
 let deleteItem = document.querySelectorAll(".deleteItem");
 let userStatus = document.querySelectorAll(".userStatus");
 

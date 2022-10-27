@@ -5,6 +5,7 @@ use App\Controller\Auth\AuthController;
 use App\Controller\BackView\RolController;
 use App\Controller\BackView\UserController;
 use App\Controller\BackView\MedidaController;
+use App\Controller\BackView\ClienteController;
 use App\Controller\BackView\ProductoController;
 use App\Controller\BackView\CategoriaController;
 use App\Controller\BackView\DashboardController;
@@ -86,3 +87,12 @@ Route::get('/productos/edit', [ProductoController::class, 'edit'])->name('produc
 Route::post('/productos/edit', [ProductoController::class, 'update']);
 Route::get('/productos/destroy', [ProductoController::class, 'destroy'])->name('productos.destroy');
 Route::get('/productos/status', [ProductoController::class, 'status'])->name('productos.status');
+
+//ClienteController
+Route::get('/clientes', [ClienteController::class, 'index'])->name('clientes.index');
+Route::get('/clientes/create', [ClienteController::class, 'create'])->name('clientes.create');
+Route::post('/clientes/create', [ClienteController::class, 'store']);
+Route::get('/clientes/edit', [ClienteController::class, 'edit'])->name('clientes.edit');
+Route::post('/clientes/edit', [ClienteController::class, 'update']);
+Route::get('/clientes/destroy', [ClienteController::class, 'destroy'])->name('clientes.destroy');
+Route::get('/clientes/status', [ClienteController::class, 'status'])->name('clientes.status');

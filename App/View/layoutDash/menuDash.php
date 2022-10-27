@@ -84,7 +84,7 @@ $linksSidebar = [
     [
         'mode' => 'menu',
         'text' => 'Clientes',
-        'url'  => 'hola',
+        'url'  => route('clientes.index'),
         'icon' => 'bi bi-people',
     ],
     [

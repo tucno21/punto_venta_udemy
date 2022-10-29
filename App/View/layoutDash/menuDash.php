@@ -102,7 +102,7 @@ $linksSidebar = [
     [
         'mode' => 'menu',
         'text' => 'Compras',
-        'url'  => 'hola',
+        'url'  => route('compras.index'),
         'icon' => 'bi bi-bag',
     ],
     [
@@ -134,6 +134,7 @@ $linksCss = [
     $linkURL . '/assets/css/style.css',
     $linkURL . '/assets/css/customizer.css',
     $linkURL . '/assets/css/icon/bootstrap-icons.css',
+    $linkURL . '/assets/css/colorToast.css',
 ];
 
 $linksScript = [

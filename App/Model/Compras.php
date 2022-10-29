@@ -4,12 +4,12 @@ namespace App\Model;
 
 use System\Model;
 
-class Proveedores extends Model
+class Compras extends Model
 {
     /**
      * nombre de la tabla
      */
-    protected static $table       = 'proveedor';
+    protected static $table       = 'compras';
     /**
      * nombre primary key
      */
@@ -17,7 +17,7 @@ class Proveedores extends Model
     /**
      * nombre de la columnas de la tabla
      */
-    protected static $allowedFields = ['ruc', 'nombre', 'telefono', 'direccion',  'estado'];
+    protected static $allowedFields = ['productos', 'total', 'serie', 'estado', 'id_proveedor', 'id_usuario'];
     /**
      * obtener los datos de la tabla en 'array' u 'object'
      */
@@ -36,9 +36,10 @@ class Proveedores extends Model
     protected static $createdField    = 'created_at';
     protected static $updatedField    = 'updated_at';
 
-    public static function busquedaJquery($data)
+    public static function datoCompra($data)
     {
-        $sql = "SELECT * FROM proveedor WHERE ruc LIKE '%{$data}%' OR nombre LIKE '%{$data}%' ";
+        // 'compras.id', 'compras.created_at, compras.total', 'compras.serie',  'proveedor.nombre'
+        $sql = "SELECT compras.id, compras.productos, compras.total, compras.serie, compras.estado, compras.created_at, proveedor.ruc, proveedor.nombre, proveedor.telefono, proveedor.direccion FROM compras INNER JOIN proveedor ON compras.id_proveedor = proveedor.id WHERE compras.id = $data";
 
         return self::querySimple($sql);
     }

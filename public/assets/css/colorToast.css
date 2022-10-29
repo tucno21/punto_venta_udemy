@@ -1,0 +1,46 @@
+.colored-toast.swal2-icon-success {
+    background-color: #a5dc86 !important;
+    color: #fff !important;
+}
+
+.colored-toast.swal2-icon-error {
+    background-color: #f27474 !important;
+}
+
+.colored-toast.swal2-icon-warning {
+    background-color: #f8bb86 !important;
+}
+
+.colored-toast.swal2-icon-info {
+    background-color: #3fc3ee !important;
+}
+
+.colored-toast.swal2-icon-question {
+    background-color: #87adbd !important;
+}
+
+.colored-toast .swal2-title {
+    color: #fff !important;
+}
+
+.colored-toast .swal2-close {
+    color: #fff !important;
+}
+
+.colored-toast .swal2-html-container {
+    color: #fff !important;
+}
+
+.swal2-icon.swal2-icon-show {
+    border-color: #fff !important;
+}
+
+.swal2-icon.swal2-success .swal2-success-line-tip,
+.swal2-icon.swal2-success .swal2-success-line-long,
+.swal2-icon.swal2-error .swal2-x-mark-line-left,
+.swal2-icon.swal2-error .swal2-x-mark-line-right {
+    background-color: #fff !important;
+}
+.swal2-icon .swal2-icon-content {
+    color: #fff !important;
+}

@@ -39,7 +39,7 @@ const buttonsX = [
 ];
 
 $(document).ready(function () {
-  var table = $("#datatableAll").DataTable({
+  var miTabla = $("#datatableAll").DataTable({
     dom,
     buttons: buttonsX,
     // pageLength: 5,
@@ -70,4 +70,42 @@ $(document).ready(function () {
   });
 
   // table.buttons().container().appendTo("#datatableAll_wrapper .col-md-6:eq(0)");
+
+  let desde = document.querySelector("#desde");
+  let hasta = document.querySelector("#hasta");
+
+  //filtro rango de fechas
+  desde.addEventListener("change", function () {
+    miTabla.draw();
+  });
+  hasta.addEventListener("change", function () {
+    miTabla.draw();
+  });
+
+  $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+    var FilterStart = desde.value;
+    //FilterStart cambiar Y-m-d por d-m-Y
+    FilterStart = FilterStart.split("-").reverse().join("-");
+
+    // console.log(FilterStart);
+    var FilterEnd = hasta.value;
+    //FilterEnd cambiar Y-m-d por d-m-Y
+    FilterEnd = FilterEnd.split("-").reverse().join("-");
+    // console.log(FilterEnd);
+
+    //columna donde se encuentra la fecha
+    var DataTableStart = data[1].trim();
+    // console.log(DataTableStart);
+    var DataTableEnd = data[1].trim();
+    // console.log(DataTableEnd);
+    if (FilterStart == "" || FilterEnd == "") {
+      return true;
+    }
+
+    if (DataTableStart >= FilterStart && DataTableEnd <= FilterEnd) {
+      return true;
+    } else {
+      return false;
+    }
+  });
 });

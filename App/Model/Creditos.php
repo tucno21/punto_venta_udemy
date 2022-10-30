@@ -36,4 +36,25 @@ class Creditos extends Model
      */
     protected static $createdField    = 'created_at';
     protected static $updatedField    = 'updated_at';
+
+    public static function creditos()
+    {
+        $sql = "SELECT creditos.id, creditos.monto, creditos.estado, creditos.created_at, ventas.serie, clientes.nombre FROM creditos INNER JOIN ventas ON creditos.id_venta = ventas.id INNER JOIN clientes ON ventas.id_cliente = clientes.id";
+        return self::querySimple($sql);
+    }
+
+    public static function creditoId($id)
+    {
+        $sql = "SELECT creditos.id, creditos.monto, creditos.estado, creditos.created_at, ventas.serie, clientes.nombre FROM creditos INNER JOIN ventas ON creditos.id_venta = ventas.id INNER JOIN clientes ON ventas.id_cliente = clientes.id WHERE creditos.id = $id";
+        return self::querySimple($sql);
+    }
+
+    public static function creditoIdComplet($id)
+    {
+        $sql = "SELECT creditos.id, creditos.monto, creditos.estado, creditos.created_at,
+                        ventas.productos, ventas.serie, ventas.total, ventas.metodo,
+                        clientes.identidad, clientes.num_identidad, clientes.nombre, clientes.telefono, clientes.direccion
+                        FROM creditos INNER JOIN ventas ON creditos.id_venta = ventas.id INNER JOIN clientes ON ventas.id_cliente = clientes.id WHERE creditos.id = $id";
+        return self::querySimple($sql);
+    }
 }

@@ -205,6 +205,7 @@ class CompraController extends Controller
         }
         $title = 'reporte de compra';
 
+        ob_start();
         if ($data->tipo == 'ticket') {
             view('compras/ticket', [
                 'compra' => $compra,

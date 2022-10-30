@@ -8,6 +8,7 @@ use App\Controller\BackView\VentaController;
 use App\Controller\BackView\CompraController;
 use App\Controller\BackView\MedidaController;
 use App\Controller\BackView\ClienteController;
+use App\Controller\BackView\CreditoController;
 use App\Controller\BackView\ProductoController;
 use App\Controller\BackView\CategoriaController;
 use App\Controller\BackView\DashboardController;
@@ -137,3 +138,10 @@ Route::get('/ventas/buscarnombre', [VentaController::class, 'buscarnombre'])->na
 Route::get('/ventas/cliente', [VentaController::class, 'cliente'])->name('ventas.cliente');
 Route::get('/ventas/pdfVenta', [VentaController::class, 'pdfVenta'])->name('ventas.pdfVenta');
 Route::get('/ventas/cantProducto', [VentaController::class, 'cantProducto'])->name('ventas.cantProducto');
+
+//CreditoController
+Route::get('/creditos', [CreditoController::class, 'index'])->name('creditos.index');
+Route::get('/creditos/dataabono', [CreditoController::class, 'dataabono'])->name('creditos.dataabono');
+Route::get('/creditos/abono', [CreditoController::class, 'abono'])->name('creditos.abono');
+Route::post('/creditos/abono', [CreditoController::class, 'abono']);
+Route::get('/creditos/pdfabono', [CreditoController::class, 'pdfabono'])->name('creditos.pdfabono');

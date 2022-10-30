@@ -224,6 +224,7 @@ class VentaController extends Controller
         }
         $title = 'reporte de compra';
 
+        ob_start();
         if ($data->tipo == 'ticket') {
             view('ventas/ticket', [
                 'venta' => $venta,

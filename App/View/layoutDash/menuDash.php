@@ -121,8 +121,26 @@ $linksSidebar = [
     [
         'mode' => 'menu',
         'text' => 'Administración de Creditos',
-        'url'  => 'hola',
+        'url'  => route('creditos.index'),
         'icon' => 'bi bi-credit-card-2-back',
+    ],
+    [
+        'mode' => 'menu',
+        'text' => 'Cotizaciones',
+        'url'  => 'hola',
+        'icon' => 'bi bi-list-task',
+    ],
+    [
+        'mode' => 'menu',
+        'text' => 'Apartados',
+        'url'  => 'hola',
+        'icon' => 'bi bi-person-lines-fill',
+    ],
+    [
+        'mode' => 'menu',
+        'text' => 'Inventario & kardex',
+        'url'  => 'hola',
+        'icon' => 'bi bi-receipt',
     ],
     [
         'mode' => 'menu',

@@ -8,6 +8,7 @@ const tablaVentas = document.querySelector("#tablaVentas");
 const totalPagar = document.querySelector("#totalPagar");
 const formVentas = document.querySelector("#formVentas");
 let productosCarrito = [];
+let cantidadProducto = 0;
 
 // Listeners
 cargarEventListeners();
@@ -172,6 +173,21 @@ function agregarProductoCarrito(data) {
   if (productosCarrito.some((prod) => prod.id === producto.id)) {
     const productos = productosCarrito.map((prod) => {
       if (prod.id === producto.id) {
+        cantProducto(prod.id);
+        //cantidadProducto !== undefined
+        if (cantidadProducto !== 0) {
+          if (parseInt(prod.cantidad) > parseInt(cantidadProducto) - 1) {
+            //toast error
+            toastPersonalizado(
+              "error",
+              "Solo hay " + cantidadProducto + " productos"
+            );
+            let cantidad = parseInt(cantidadProducto);
+            prod.cantidad = cantidad;
+            return prod;
+          }
+        }
+
         let cantidad = parseInt(prod.cantidad);
         cantidad++;
         prod.cantidad = cantidad;
@@ -187,15 +203,16 @@ function agregarProductoCarrito(data) {
   }
   carritoHTML();
 }
-//suma total a pagar
-function sumaPagar() {
-  totalPagar.value = "";
-  let total = 0;
-  productosCarrito.forEach((producto) => {
-    total += producto.cantidad * producto.precio;
-  });
-  // return total;
-  totalPagar.value = total;
+
+//consultar cantidad de producto
+async function cantProducto(id) {
+  const cantProducto = document.querySelector("#cantProducto");
+  const link = cantProducto.getAttribute("data-link") + "?id=" + id;
+  const response = await fetch(link);
+  const data = await response.json();
+  // console.log(data.cant);
+  cantidadProducto = data.cant;
+  return cantidadProducto;
 }
 
 //cambiar cantidad de productos
@@ -217,11 +234,10 @@ function aumentarCantidad() {
       //comparar si la cantidad es mayor a la cantidad de productos
       if (cantidad > data.cant) {
         toastPersonalizado("error", "Solo hay " + data.cant + " productos");
-        e.target.value = 1;
         //ejecutar funcion para actualizar el carrito
         productosCarrito = productosCarrito.map((prod) => {
           if (prod.id === parseInt(productoId)) {
-            prod.cantidad = 1;
+            prod.cantidad = data.cant;
             return prod;
           } else {
             return prod;
@@ -239,6 +255,17 @@ function aumentarCantidad() {
       carritoHTML();
     });
   });
+}
+
+//suma total a pagar
+function sumaPagar() {
+  totalPagar.value = "";
+  let total = 0;
+  productosCarrito.forEach((producto) => {
+    total += producto.cantidad * producto.precio;
+  });
+  // return total;
+  totalPagar.value = total;
 }
 
 //buscar proveedor

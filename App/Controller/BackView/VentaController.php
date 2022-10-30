@@ -3,13 +3,14 @@
 namespace App\Controller\BackView;
 
 use Dompdf\Dompdf;
-use App\Model\Compras;
+use App\Model\Ventas;
 use System\Controller;
+use App\Model\Clientes;
+use App\Model\Creditos;
 use App\Model\Productos;
-use App\Model\Proveedores;
 use App\Model\Configuracion;
 
-class CompraController extends Controller
+class VentaController extends Controller
 {
     public function __construct()
     {
@@ -21,56 +22,63 @@ class CompraController extends Controller
 
     public function index()
     {
-        // $compras = Compras::get();
-        $compras = Compras::select('compras.id', 'compras.created_at, compras.total', 'compras.serie, compras.estado',  'proveedor.nombre')
-            ->join('proveedor', 'compras.id_proveedor', '=', 'proveedor.id')
+        $ventas = Ventas::select('ventas.id', 'ventas.created_at, ventas.total', 'ventas.serie, ventas.estado, ventas.metodo',  'clientes.nombre')
+            ->join('clientes', 'ventas.id_cliente', '=', 'clientes.id')
             ->orderBy('id', 'desc')
             ->get();
-        // dd($compras);
+        // dd($ventas);
         //cuando viene un solo objeto
-        if (is_object($compras)) {
-            $compras = [$compras];
+        if (is_object($ventas)) {
+            $ventas = [$ventas];
         }
 
-        foreach ($compras as $compra) {
+        foreach ($ventas as $venta) {
             //fecha
-            $fecha = date('d-m-Y', strtotime($compra->created_at));
-            //add $compra
-            $compra->fecha = $fecha;
+            $fecha = date('d-m-Y', strtotime($venta->created_at));
+            //add $venta
+            $venta->fecha = $fecha;
             //hora
-            $hora = date('H:i:s', strtotime($compra->created_at));
-            //add $compra
-            $compra->hora = $hora;
+            $hora = date('H:i:s', strtotime($venta->created_at));
+            //add $venta
+            $venta->hora = $hora;
         }
 
-        return view('compras/index', [
-            'titleGlobal' => 'Compras Punto de venta',
-            'compras' => $compras,
+        return view('ventas/index', [
+            'titleGlobal' => 'Ventas Punto de venta',
+            'ventas' => $ventas,
         ]);
     }
 
     public function create()
     {
-        return view('compras/create', [
-            'titleGlobal' => 'Categorias',
+        return view('ventas/create', [
+            'titleGlobal' => 'Ventas Punto de venta',
         ]);
     }
 
     public function store()
     {
-        // $data = $this->request()->getInput();
-        // global post
         $data  = $_POST;
 
         $productos = json_decode($data['productos'], true);
 
         foreach ($productos as $producto) {
             $info = Productos::where('id', $producto['id'])->first();
-            $info->cantidad = $info->cantidad + $producto['cantidad'];
+            $info->cantidad = $info->cantidad - $producto['cantidad'];
             Productos::update($producto['id'], ['cantidad' => $info->cantidad]);
         }
 
-        $result = Compras::create($data);
+        $result = Ventas::create($data);
+        //traer ventas 
+        $venta = Ventas::where('id', $result->id)->first();
+
+        if ($venta->metodo == 'CREDITO') {
+            $credito = [
+                'monto' => $venta->total,
+                'id_venta' => $venta->id,
+            ];
+            Creditos::create($credito);
+        }
 
         if ($result->status) {
             //json ok
@@ -119,21 +127,22 @@ class CompraController extends Controller
     public function destroy()
     {
         $data = $this->request()->getInput();
-        $compra = Compras::where('id', $data->id)->first();
+        $venta = Ventas::where('id', $data->id)->first();
 
-        $productos = json_decode($compra->productos, true);
+        $productos = json_decode($venta->productos, true);
 
         $result;
         foreach ($productos as $producto) {
             $info = Productos::where('id', $producto['id'])->first();
-            $info->cantidad = $info->cantidad - $producto['cantidad'];
+            $info->cantidad = $info->cantidad + $producto['cantidad'];
             $result = Productos::update($producto['id'], ['cantidad' => $info->cantidad]);
         }
 
-        $cambio = Compras::update($compra->id, ['estado' => 0]);
-        session()->flash('successMessage', 'Se ha anulado la compra');
-        return redirect()->route('compras.index');
+        $cambio = Ventas::update($venta->id, ['estado' => 0]);
+        session()->flash('successMessage', 'Se ha anulado la ventas');
+        return redirect()->route('ventas.index');
     }
+
     public function barcode()
     {
         $data = $this->request()->getInput();
@@ -161,18 +170,17 @@ class CompraController extends Controller
         foreach ($result as $key => $value) {
             $response['id'] = $value->id;
             $response['label'] = $value->descripcion;
-            $response['precio'] = $value->precio_compra;
+            $response['precio'] = $value->precio_venta;
             array_push($array, $response);
         }
 
         echo json_encode($array, JSON_UNESCAPED_UNICODE);
     }
 
-    public function proveedor()
+    public function cliente()
     {
         $data = $this->request()->getInput();
-        // $result = Proveedores::where('nombre', 'like', '%' . $data->term . '%')->get();
-        $result = Proveedores::busquedaJquery($data->term);
+        $result = Clientes::busquedaJquery($data->term);
 
         if (is_object($result)) {
             $result = [$result];
@@ -181,39 +189,50 @@ class CompraController extends Controller
         $array = [];
         foreach ($result as $key => $value) {
             $response['id'] = $value->id;
-            $response['label'] = $value->ruc . ' ' . $value->nombre;
+            $response['label'] = $value->num_identidad . ' ' . $value->nombre;
             $response['nombre'] = $value->nombre;
             $response['telefono'] = $value->telefono;
-            $response['direccion'] = $value->direccion;
+            $response['num_identidad'] = $value->num_identidad;
             array_push($array, $response);
         }
 
         echo json_encode($array, JSON_UNESCAPED_UNICODE);
     }
 
-    public function pdfCompra()
+    public function cantProducto()
+    {
+        $data = $this->request()->getInput();
+        $result = Productos::where('id', $data->id)->first();
+        // dd($result);
+
+        $response = ['cant' => $result->cantidad];
+        echo json_encode($response, JSON_UNESCAPED_UNICODE);
+    }
+
+    public function pdfVenta()
     {
         $data = $this->request()->getInput();
 
         $empresa = Configuracion::get();
-        $compra = Compras::datoCompra($data->id);
-        // dd($compra);
-        //$compra es array vacio
-        if (empty($compra)) {
+        $venta = Ventas::datoVenta($data->id);
+
+        // dd($venta);
+        //$venta es array vacio
+        if (empty($venta)) {
             echo 'no hay datos';
             exit;
         }
         $title = 'reporte de compra';
 
         if ($data->tipo == 'ticket') {
-            view('compras/ticket', [
-                'compra' => $compra,
+            view('ventas/ticket', [
+                'venta' => $venta,
                 'empresa' => $empresa,
                 'title' => $title,
             ]);
         } else if ($data->tipo == 'factura') {
-            view('compras/factura', [
-                'compra' => $compra,
+            view('ventas/factura', [
+                'venta' => $venta,
                 'empresa' => $empresa,
                 'title' => $title,
             ]);
@@ -242,9 +261,9 @@ class CompraController extends Controller
         $dompdf->render();
 
         if ($data->tipo == 'ticket') {
-            $dompdf->stream('ticket_' . $compra->serie . '.pdf', ['Attachment' => false]);
+            $dompdf->stream('ticket_' . $venta->serie . '.pdf', ['Attachment' => false]);
         } else if ($data->tipo == 'factura') {
-            $dompdf->stream('factura_' . $compra->serie . '.pdf', ['Attachment' => false]);
+            $dompdf->stream('factura_' . $venta->serie . '.pdf', ['Attachment' => false]);
         }
         exit;
     }

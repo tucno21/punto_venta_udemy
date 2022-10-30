@@ -4,12 +4,12 @@ namespace App\Model;
 
 use System\Model;
 
-class Clientes extends Model
+class Creditos extends Model
 {
     /**
      * nombre de la tabla
      */
-    protected static $table       = 'clientes';
+    protected static $table       = 'creditos';
     /**
      * nombre primary key
      */
@@ -17,7 +17,7 @@ class Clientes extends Model
     /**
      * nombre de la columnas de la tabla
      */
-    protected static $allowedFields = ['identidad', 'num_identidad', 'nombre', 'telefono', 'correo', 'direccion', 'estado'];
+    protected static $allowedFields = ['monto', 'estado', 'id_venta'];
     /**
      * obtener los datos de la tabla en 'array' u 'object'
      */
@@ -26,6 +26,7 @@ class Clientes extends Model
      * si hay un campo de contraseña cifrar (true/false)
      */
     protected static $passEncrypt = false;
+
     protected static $useTimestamps   = true;
     /**
      * $createdField debe ser DATETIME o TIMESTAMPS con condicion null
@@ -35,11 +36,4 @@ class Clientes extends Model
      */
     protected static $createdField    = 'created_at';
     protected static $updatedField    = 'updated_at';
-
-    public static function busquedaJquery($data)
-    {
-        $sql = "SELECT * FROM clientes WHERE num_identidad LIKE '%{$data}%' OR nombre LIKE '%{$data}%' ";
-
-        return self::querySimple($sql);
-    }
 }

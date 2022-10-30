@@ -103,13 +103,20 @@ $linksSidebar = [
         'mode' => 'menu',
         'text' => 'Compras',
         'url'  => route('compras.index'),
-        'icon' => 'bi bi-bag',
+        'icon' => 'bi bi-cart4',
     ],
     [
         'mode' => 'menu',
         'text' => 'Ventas',
-        'url'  => 'hola',
+        'url'  => route('ventas.index'),
         'icon' => 'bi bi-cash',
+    ],
+    [
+        'mode' => 'menu',
+        'text' => 'Nueva Ventas',
+        'url'  => route('ventas.create'),
+        // 'icon' => 'bi bi-cash-coin',
+        'icon' => 'bi bi-newspaper',
     ],
     [
         'mode' => 'menu',

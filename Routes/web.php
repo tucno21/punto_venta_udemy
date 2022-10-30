@@ -4,6 +4,7 @@ use System\Route;
 use App\Controller\Auth\AuthController;
 use App\Controller\BackView\RolController;
 use App\Controller\BackView\UserController;
+use App\Controller\BackView\VentaController;
 use App\Controller\BackView\CompraController;
 use App\Controller\BackView\MedidaController;
 use App\Controller\BackView\ClienteController;
@@ -112,12 +113,27 @@ Route::get('/proveedores/status', [ProveedorController::class, 'status'])->name(
 Route::get('/compras', [CompraController::class, 'index'])->name('compras.index');
 Route::get('/compras/create', [CompraController::class, 'create'])->name('compras.create');
 Route::post('/compras/create', [CompraController::class, 'store']);
-Route::get('/compras/edit', [CompraController::class, 'edit'])->name('compras.edit');
-Route::post('/compras/edit', [CompraController::class, 'update']);
+// Route::get('/compras/edit', [CompraController::class, 'edit'])->name('compras.edit');
+// Route::post('/compras/edit', [CompraController::class, 'update']);
 Route::get('/compras/destroy', [CompraController::class, 'destroy'])->name('compras.destroy');
-Route::get('/compras/status', [CompraController::class, 'status'])->name('compras.status');
+// Route::get('/compras/status', [CompraController::class, 'status'])->name('compras.status');
 
 Route::get('/compras/barcode', [CompraController::class, 'barcode'])->name('compras.barcode');
 Route::get('/compras/buscarnombre', [CompraController::class, 'buscarnombre'])->name('compras.buscarnombre');
 Route::get('/compras/proveedor', [CompraController::class, 'proveedor'])->name('compras.proveedor');
 Route::get('/compras/pdfCompra', [CompraController::class, 'pdfCompra'])->name('compras.pdfCompra');
+
+//VentaController
+Route::get('/ventas', [VentaController::class, 'index'])->name('ventas.index');
+Route::get('/ventas/create', [VentaController::class, 'create'])->name('ventas.create');
+Route::post('/ventas/create', [VentaController::class, 'store']);
+Route::get('/ventas/edit', [VentaController::class, 'edit'])->name('ventas.edit');
+Route::post('/ventas/edit', [VentaController::class, 'update']);
+Route::get('/ventas/destroy', [VentaController::class, 'destroy'])->name('ventas.destroy');
+Route::get('/ventas/status', [VentaController::class, 'status'])->name('ventas.status');
+
+Route::get('/ventas/barcode', [VentaController::class, 'barcode'])->name('ventas.barcode');
+Route::get('/ventas/buscarnombre', [VentaController::class, 'buscarnombre'])->name('ventas.buscarnombre');
+Route::get('/ventas/cliente', [VentaController::class, 'cliente'])->name('ventas.cliente');
+Route::get('/ventas/pdfVenta', [VentaController::class, 'pdfVenta'])->name('ventas.pdfVenta');
+Route::get('/ventas/cantProducto', [VentaController::class, 'cantProducto'])->name('ventas.cantProducto');

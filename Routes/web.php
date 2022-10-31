@@ -15,6 +15,7 @@ use App\Controller\BackView\CategoriaController;
 use App\Controller\BackView\DashboardController;
 use App\Controller\BackView\ProveedorController;
 use App\Controller\BackView\CotizacionController;
+use App\Controller\BackView\InventarioController;
 use App\Controller\BackView\PermissionController;
 use App\Controller\BackView\ConfiguracionController;
 use App\Controller\BackView\RolesPermissionController;
@@ -179,3 +180,6 @@ Route::get('/apartados/buscarnombre', [ApartadoController::class, 'buscarnombre'
 Route::get('/apartados/cliente', [ApartadoController::class, 'cliente'])->name('apartados.cliente');
 Route::get('/apartados/pdfApartado', [ApartadoController::class, 'pdfApartado'])->name('apartados.pdfApartado');
 Route::get('/apartados/cantProducto', [ApartadoController::class, 'cantProducto'])->name('apartados.cantProducto');
+
+//InventarioController
+Route::get('/inventarios', [InventarioController::class, 'index'])->name('inventarios.index');

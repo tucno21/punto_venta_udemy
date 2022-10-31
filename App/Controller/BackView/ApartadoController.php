@@ -6,6 +6,7 @@ use System\Controller;
 use App\Model\Clientes;
 use App\Model\Apartados;
 use App\Model\Productos;
+use App\Model\Inventarios;
 
 class ApartadoController extends Controller
 {
@@ -52,6 +53,18 @@ class ApartadoController extends Controller
         $result = Apartados::create($data);
 
         if ($result->status) {
+            $compra = Apartados::where('id', $result->id)->first();
+            foreach (json_decode($compra->productos, true) as $producto) {
+                $data = [
+                    'movimiento' => 'Apartado N° ' . $compra->id,
+                    'accion' => 'salida',
+                    'cantidad' => $producto['cantidad'],
+                    'id_producto' => $producto['id'],
+                    'id_usuario' => session()->user()->id,
+                ];
+                Inventarios::create($data);
+            }
+
             //json ok
             $response = ['status' => true, 'message' => $result->id];
             echo json_encode($response, JSON_UNESCAPED_UNICODE);

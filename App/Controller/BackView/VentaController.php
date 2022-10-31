@@ -8,6 +8,7 @@ use System\Controller;
 use App\Model\Clientes;
 use App\Model\Creditos;
 use App\Model\Productos;
+use App\Model\Inventarios;
 use App\Model\Configuracion;
 
 class VentaController extends Controller
@@ -80,6 +81,17 @@ class VentaController extends Controller
             Creditos::create($credito);
         }
 
+        foreach (json_decode($venta->productos, true) as $producto) {
+            $data = [
+                'movimiento' => 'Venta N° ' . $venta->id,
+                'accion' => 'salida',
+                'cantidad' => $producto['cantidad'],
+                'id_producto' => $producto['id'],
+                'id_usuario' => session()->user()->id,
+            ];
+            Inventarios::create($data);
+        }
+
         if ($result->status) {
             //json ok
             $response = ['status' => true, 'message' => $result->id];
@@ -136,6 +148,15 @@ class VentaController extends Controller
             $info = Productos::where('id', $producto['id'])->first();
             $info->cantidad = $info->cantidad + $producto['cantidad'];
             $result = Productos::update($producto['id'], ['cantidad' => $info->cantidad]);
+
+            $data = [
+                'movimiento' => 'Venta N° ' . $venta->id,
+                'accion' => 'entrada',
+                'cantidad' => $producto['cantidad'],
+                'id_producto' => $producto['id'],
+                'id_usuario' => session()->user()->id,
+            ];
+            Inventarios::create($data);
         }
 
         $cambio = Ventas::update($venta->id, ['estado' => 0]);

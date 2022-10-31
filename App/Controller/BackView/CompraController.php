@@ -6,6 +6,7 @@ use Dompdf\Dompdf;
 use App\Model\Compras;
 use System\Controller;
 use App\Model\Productos;
+use App\Model\Inventarios;
 use App\Model\Proveedores;
 use App\Model\Configuracion;
 
@@ -73,6 +74,19 @@ class CompraController extends Controller
         $result = Compras::create($data);
 
         if ($result->status) {
+            //traer compra registrada
+            $compra = Compras::where('id', $result->id)->first();
+            foreach (json_decode($compra->productos, true) as $producto) {
+                $data = [
+                    'movimiento' => 'Compra N° ' . $compra->id,
+                    'accion' => 'entrada',
+                    'cantidad' => $producto['cantidad'],
+                    'id_producto' => $producto['id'],
+                    'id_usuario' => session()->user()->id,
+                ];
+                Inventarios::create($data);
+            }
+
             //json ok
             $response = ['status' => true, 'message' => $result->id];
             echo json_encode($response, JSON_UNESCAPED_UNICODE);
@@ -128,6 +142,15 @@ class CompraController extends Controller
             $info = Productos::where('id', $producto['id'])->first();
             $info->cantidad = $info->cantidad - $producto['cantidad'];
             $result = Productos::update($producto['id'], ['cantidad' => $info->cantidad]);
+
+            $data = [
+                'movimiento' => 'Compra Anulada  N° ' . $compra->id,
+                'accion' => 'salida',
+                'cantidad' => $producto['cantidad'],
+                'id_producto' => $producto['id'],
+                'id_usuario' => session()->user()->id,
+            ];
+            Inventarios::create($data);
         }
 
         $cambio = Compras::update($compra->id, ['estado' => 0]);

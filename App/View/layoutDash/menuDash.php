@@ -139,7 +139,7 @@ $linksSidebar = [
     [
         'mode' => 'menu',
         'text' => 'Inventario & kardex',
-        'url'  => 'hola',
+        'url'  => route('inventarios.index'),
         'icon' => 'bi bi-receipt',
     ],
     [

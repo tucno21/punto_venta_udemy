@@ -127,7 +127,7 @@ $linksSidebar = [
     [
         'mode' => 'menu',
         'text' => 'Cotizaciones',
-        'url'  => 'hola',
+        'url'  => route('cotizaciones.index'),
         'icon' => 'bi bi-list-task',
     ],
     [

@@ -13,6 +13,7 @@ use App\Controller\BackView\ProductoController;
 use App\Controller\BackView\CategoriaController;
 use App\Controller\BackView\DashboardController;
 use App\Controller\BackView\ProveedorController;
+use App\Controller\BackView\CotizacionController;
 use App\Controller\BackView\PermissionController;
 use App\Controller\BackView\ConfiguracionController;
 use App\Controller\BackView\RolesPermissionController;
@@ -145,3 +146,18 @@ Route::get('/creditos/dataabono', [CreditoController::class, 'dataabono'])->name
 Route::get('/creditos/abono', [CreditoController::class, 'abono'])->name('creditos.abono');
 Route::post('/creditos/abono', [CreditoController::class, 'abono']);
 Route::get('/creditos/pdfabono', [CreditoController::class, 'pdfabono'])->name('creditos.pdfabono');
+
+//CotizacionController
+Route::get('/cotizaciones', [CotizacionController::class, 'index'])->name('cotizaciones.index');
+Route::get('/cotizaciones/create', [CotizacionController::class, 'create'])->name('cotizaciones.create');
+Route::post('/cotizaciones/create', [CotizacionController::class, 'store']);
+Route::get('/cotizaciones/edit', [CotizacionController::class, 'edit'])->name('cotizaciones.edit');
+Route::post('/cotizaciones/edit', [CotizacionController::class, 'update']);
+Route::get('/cotizaciones/destroy', [CotizacionController::class, 'destroy'])->name('cotizaciones.destroy');
+Route::get('/cotizaciones/status', [CotizacionController::class, 'status'])->name('cotizaciones.status');
+
+Route::get('/cotizaciones/barcode', [CotizacionController::class, 'barcode'])->name('cotizaciones.barcode');
+Route::get('/cotizaciones/buscarnombre', [CotizacionController::class, 'buscarnombre'])->name('cotizaciones.buscarnombre');
+Route::get('/cotizaciones/cliente', [CotizacionController::class, 'cliente'])->name('cotizaciones.cliente');
+Route::get('/cotizaciones/pdfCotizacion', [CotizacionController::class, 'pdfCotizacion'])->name('cotizaciones.pdfCotizacion');
+Route::get('/cotizaciones/cantProducto', [CotizacionController::class, 'cantProducto'])->name('cotizaciones.cantProducto');

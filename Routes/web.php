@@ -9,6 +9,7 @@ use App\Controller\BackView\CompraController;
 use App\Controller\BackView\MedidaController;
 use App\Controller\BackView\ClienteController;
 use App\Controller\BackView\CreditoController;
+use App\Controller\BackView\ApartadoController;
 use App\Controller\BackView\ProductoController;
 use App\Controller\BackView\CategoriaController;
 use App\Controller\BackView\DashboardController;
@@ -161,3 +162,20 @@ Route::get('/cotizaciones/buscarnombre', [CotizacionController::class, 'buscarno
 Route::get('/cotizaciones/cliente', [CotizacionController::class, 'cliente'])->name('cotizaciones.cliente');
 Route::get('/cotizaciones/pdfCotizacion', [CotizacionController::class, 'pdfCotizacion'])->name('cotizaciones.pdfCotizacion');
 Route::get('/cotizaciones/cantProducto', [CotizacionController::class, 'cantProducto'])->name('cotizaciones.cantProducto');
+
+
+//ApartadoController
+Route::get('/apartados', [ApartadoController::class, 'index'])->name('apartados.index');
+Route::get('/apartados/create', [ApartadoController::class, 'create'])->name('apartados.create');
+Route::post('/apartados/create', [ApartadoController::class, 'store']);
+Route::get('/apartados/edit', [ApartadoController::class, 'edit'])->name('apartados.edit');
+Route::post('/apartados/edit', [ApartadoController::class, 'update']);
+Route::get('/apartados/destroy', [ApartadoController::class, 'destroy'])->name('apartados.destroy');
+Route::get('/apartados/listar', [ApartadoController::class, 'listar'])->name('apartados.listar');
+Route::get('/apartados/apartadoid', [ApartadoController::class, 'apartadoid'])->name('apartados.apartadoid');
+
+Route::get('/apartados/barcode', [ApartadoController::class, 'barcode'])->name('apartados.barcode');
+Route::get('/apartados/buscarnombre', [ApartadoController::class, 'buscarnombre'])->name('apartados.buscarnombre');
+Route::get('/apartados/cliente', [ApartadoController::class, 'cliente'])->name('apartados.cliente');
+Route::get('/apartados/pdfApartado', [ApartadoController::class, 'pdfApartado'])->name('apartados.pdfApartado');
+Route::get('/apartados/cantProducto', [ApartadoController::class, 'cantProducto'])->name('apartados.cantProducto');

@@ -133,7 +133,7 @@ $linksSidebar = [
     [
         'mode' => 'menu',
         'text' => 'Apartados',
-        'url'  => 'hola',
+        'url'  => route('apartados.index'),
         'icon' => 'bi bi-person-lines-fill',
     ],
     [
